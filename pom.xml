@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.iqmsoft</groupId>
+  <version>1.0</version>
+  <artifactId>WildFlySwarmVaadin</artifactId>
+
+  <name>WildFly Swarm Examples: CDI and Vaadin</name>
+  <description>WildFly Swarm Examples: CDI and Vaadin</description>
+
+  <packaging>war</packaging>
+  
+  <properties>
+      <version.vaadin>7.5.3</version.vaadin>
+  
+    <version.wildfly-swarm>2018.2.0</version.wildfly-swarm>
+
+    <maven.min.version>3.2.1</maven.min.version>
+
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+    
+    <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>bom-all</artifactId>
+        <version>2018.2.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.wildfly.swarm.examples</groupId>
+        <artifactId>examples-base</artifactId>
+        <version>2018.2.0</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>wildfly-swarm-plugin</artifactId>
+        <version>2018.2.0</version>
+        <executions>
+          <execution>
+            <id>package</id>
+          </execution>
+          <execution>
+            <id>start</id>
+          </execution>
+          <execution>
+            <id>stop</id>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.5.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>2.19.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.19.1</version>
+          <configuration>
+            <systemPropertyVariables>
+              <org.apache.maven.user-settings>${session.request.userSettingsFile.path}</org.apache.maven.user-settings>
+            </systemPropertyVariables>
+          </configuration>
+        </plugin>
+         <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>1.10</version>
+        </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-server</artifactId>
+        <version>${version.vaadin}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-client-compiled</artifactId>
+        <version>${version.vaadin}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-themes</artifactId>
+        <version>${version.vaadin}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-cdi</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.enterprise</groupId>
+      <artifactId>cdi-api</artifactId>
+      <version>1.2</version>
+      <scope>provided</scope>
+    </dependency>
+
+  </dependencies>
+
+</project>
